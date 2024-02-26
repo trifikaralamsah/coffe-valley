@@ -20,6 +20,7 @@ const data = [
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const idParams = searchParams.get("id");
+  console.log(idParams);
 
   // old
   // if (idParams) {

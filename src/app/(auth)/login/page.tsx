@@ -1,13 +1,12 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function LoginPage({ searchParams }: any) {
-  const searchParamsUrl = searchParams.callbackUrl || "/home";
+  const searchParamsUrl = searchParams.callbackUrl || "/";
   const { push } = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -63,34 +62,16 @@ export default function LoginPage({ searchParams }: any) {
               {errorMessage}
             </h3>
           )}
-          <div className="flex justify-center items-center">
-            <div className="flex-shrink-0 ">
-              <Image
-                src="/images/logo-coffe.png"
-                alt="logo"
-                width={90}
-                height={80}
-              />
-            </div>
-            <div className="ml-3 justify-center">
-              <h2 className="text-2xl font-bold italic text-gray-900 dark:text-white">
-                Coffe Valley
-              </h2>
-              <p className="text-sm text-gray-900 dark:text-white">
-                Taste the love in every cup!
-              </p>
-              <p className="text-white text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
+          <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+            Sign in to our platform
+          </h3>
 
           <div>
             <label
               htmlFor="email"
               className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
             >
-              Email
+              Your email
             </label>
             <input
               type="email"
@@ -106,7 +87,7 @@ export default function LoginPage({ searchParams }: any) {
               htmlFor="password"
               className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300"
             >
-              Password
+              Your password
             </label>
             <input
               type="password"
@@ -124,9 +105,9 @@ export default function LoginPage({ searchParams }: any) {
               isLoading ? "opacity-50" : ""
             } bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
           >
-            {isLoading ? "Loading..." : "Login"}
+            {isLoading ? "Loading..." : "Login to your account"}
           </button>
-          {/* <hr />
+          <hr />
           <button
             type="button"
             onClick={() =>
@@ -137,14 +118,14 @@ export default function LoginPage({ searchParams }: any) {
             } bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
           >
             Login With Google
-          </button> */}
+          </button>
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-            Belum Punya Akun?{" "}
+            Not registered?{" "}
             <Link
               href="/register"
               className="text-blue-700 hover:underline dark:text-blue-500"
             >
-              Daftar
+              Create account
             </Link>
           </div>
         </form>

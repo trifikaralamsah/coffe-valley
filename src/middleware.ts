@@ -9,8 +9,11 @@ export function mainMiddleware(request: NextRequest) {
 
 export default withAuth(mainMiddleware, [
   "/dashboard",
-  "/profile",
-  "/login",
   "/register",
   "/",
+  "/home",
+  "/catalog",
+  "/orderStatus",
+  "/distributors",
+  "/upload",
 ]);

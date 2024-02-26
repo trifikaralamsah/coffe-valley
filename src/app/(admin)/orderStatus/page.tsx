@@ -1,14 +1,14 @@
 import React from "react";
 
-const CatalogPage = () => {
+const OrderStatusPage = () => {
   return (
     <div className="px-24 mt-4">
-      <table className="table-auto w-full">
+      <table className="table-fixed w-full">
         <thead>
           <tr>
-            <th className="w-1/4">Bean</th>
-            <th className="w-1/2">Description</th>
-            <th className="w-1/4">Price/Unit</th>
+            <th>Distributor Name</th>
+            <th>City</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -33,4 +33,4 @@ const CatalogPage = () => {
   );
 };
 
-export default CatalogPage;
+export default OrderStatusPage;

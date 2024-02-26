@@ -45,7 +45,7 @@ export async function register(data: {
   if (users.length > 0) {
     return { status: false, statusCode: 400, message: "Email already exists" };
   } else {
-    data.role = "member";
+    data.role = "admin";
     data.password = await bcrypt.hash(data.password, 10);
 
     try {
@@ -116,7 +116,7 @@ export async function loginWithGoogle(data: any, callback: any) {
       callback({ status: true, data: data });
     });
   } else {
-    data.role = "member";
+    data.role = "admin";
     await addDoc(collection(firestore, "users"), data).then(() => {
       callback({ status: true, data: data });
     });
@@ -124,13 +124,16 @@ export async function loginWithGoogle(data: any, callback: any) {
 }
 
 // product
-export async function addProduct(data: {
+export async function addDistributor(data: {
   name: string;
-  image: string;
-  price: number;
+  city: string;
+  country: string;
+  email: string;
+  phone: string;
+  state: string;
 }) {
   try {
-    await addDoc(collection(firestore, "products"), data);
+    await addDoc(collection(firestore, "distributors"), data);
     return {
       status: true,
       statusCode: 200,
