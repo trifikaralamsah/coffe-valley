@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import path from "path";
 import { writeFile } from "fs/promises";
-import { addProduct } from "@/lib/firebase/services";
+import { uploadBean } from "@/lib/firebase/services";
 
 export const POST = async (req: any) => {
   const formData = await req.formData();
-  console.log(formData.get("name"));
-  console.log(formData.get("price"));
-  console.log(formData.get("file"));
 
   const file = formData.get("file");
   if (!file) {
@@ -24,15 +21,28 @@ export const POST = async (req: any) => {
     );
 
     // add product new
-    await addProduct({
-      name: formData.get("name"),
-      image: "/uploads/" + filename,
-      price: Number(formData.get("price")),
+    await uploadBean({
+      title: formData.get("title"),
+      file: "/uploads/" + filename,
+      author: formData.get("author"),
+      id: Math.random().toString(8).slice(2),
     });
 
-    return NextResponse.json({ Message: "Success", status: 201 });
+    // return NextResponse.json({
+    //   Message: "Success",
+    //   status: 200,
+    //   statusCode: 200,
+    // });
+    const url = new URL("/upload", "http://localhost:3000");
+    url.searchParams.set("success", "true");
+    return NextResponse.redirect(url);
+    // return NextResponse.redirect("/distributors");
   } catch (error) {
     console.log("Error occured ", error);
-    return NextResponse.json({ Message: "Failed", status: 500 });
+    return NextResponse.json({
+      Message: "Failed",
+      status: 500,
+      statsCode: 500,
+    });
   }
 };

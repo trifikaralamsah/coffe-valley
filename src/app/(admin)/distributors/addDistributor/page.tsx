@@ -21,6 +21,7 @@ const AddDistributor = () => {
         country: e.target.country.value,
         state: e.target.state.value,
         email: e.target.email.value,
+        id: Math.random().toString(8).slice(2),
       }),
     });
 

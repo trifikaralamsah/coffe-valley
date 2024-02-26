@@ -29,9 +29,7 @@ const DistributorsPage = () => {
               <td>
                 <button
                   onClick={() =>
-                    push.push(
-                      `/distributors/editDistributor/id=${distributor.id}`
-                    )
+                    push.push(`/distributors/editDistributor/${distributor.id}`)
                   }
                   className="bg-green-500 hover:bg-green-700 text-white font-bold px-4 rounded"
                 >

@@ -6,6 +6,7 @@ import {
   getDocs,
   getFirestore,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -21,6 +22,13 @@ export async function retrieveData(collectionName: string) {
 }
 
 export async function retrieveDataById(collectionName: string, id: string) {
+  // const q = query(collection(firestore, "distributors"), where("id", "==", id));
+  // const snapshot = await getDocs(q);
+  // const users = snapshot.docs.map((doc) => ({
+  //   id: doc.id,
+  //   ...doc.data(),
+  // }));
+  // return users[0];
   const querySnapshot = await getDoc(doc(firestore, collectionName, id));
   const data = querySnapshot.data();
   return data;
@@ -131,9 +139,67 @@ export async function addDistributor(data: {
   email: string;
   phone: string;
   state: string;
+  id: string;
 }) {
   try {
-    await addDoc(collection(firestore, "distributors"), data);
+    await setDoc(doc(firestore, "distributors", data.id), data);
+    return {
+      status: true,
+      statusCode: 200,
+      message: "Data Berhasil Ditambahkan",
+    };
+  } catch (error) {
+    return {
+      status: false,
+      statusCode: 400,
+      message: "Data Gagal Ditambahkan",
+    };
+  }
+}
+
+export async function editDistributor(data: {
+  name: string;
+  city: string;
+  country: string;
+  email: string;
+  phone: number;
+  state: string;
+  id: string;
+}) {
+  const q = query(
+    collection(firestore, "distributors"),
+    where("id", "==", data.id)
+  );
+  const snapshot = await getDocs(q);
+  const users = snapshot.docs.map((doc: any) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  if (users.length > 0) {
+    await updateDoc(doc(firestore, "distributors", users[0].id), data);
+    return {
+      status: true,
+      statusCode: 200,
+      message: "Data Berhasil Diupdate",
+    };
+  } else {
+    return {
+      status: false,
+      statusCode: 400,
+      message: "Data Gagal Diupdate",
+    };
+  }
+}
+
+export async function uploadBean(data: {
+  author: string;
+  id: string;
+  file: string;
+  title: string;
+}) {
+  try {
+    await setDoc(doc(firestore, "uploadBean", data.id), data);
     return {
       status: true,
       statusCode: 200,

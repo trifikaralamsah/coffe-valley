@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 
   // Firebase
   if (idParams) {
-    const detailProduct = await retrieveDataById("distributors", idParams);
+    const detailProduct = await retrieveDataById("uploadBean", idParams);
     console.log(detailProduct);
     if (detailProduct) {
       return NextResponse.json({
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const products = await retrieveData("distributors");
+  const products = await retrieveData("uploadBean");
 
   return NextResponse.json({ status: 200, message: "Success", products });
 }
