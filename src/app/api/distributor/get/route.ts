@@ -46,6 +46,7 @@ export async function GET(request: NextRequest) {
   // Firebase
   if (idParams) {
     const detailProduct = await retrieveDataById("distributors", idParams);
+    console.log(detailProduct);
     if (detailProduct) {
       return NextResponse.json({
         status: 200,

@@ -10,7 +10,7 @@ const EditDistributor = (props: any) => {
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
   const { push } = useRouter();
   const { data, error, isLoading } = useSWR(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/product?id=${params.id}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/distributor/get?id=${params.id}`,
     fetcher
   );
 
